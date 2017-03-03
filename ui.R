@@ -3,26 +3,26 @@ library(shiny)
 library(shinythemes)
 
 # Define UI for application that draws a histogram
-shinyUI(fluidPage(theme = shinytheme('united'),
+shinyUI(fluidPage(theme = shinytheme('sandstone'),
   
   navbarPage('King County Safe Injection Sites',
-    tabPanel('Eval 1',
+    tabPanel('Drug Overdose Trends',
       sidebarLayout(
-        sidebarPanel('placehold', width = 2
+        sidebarPanel('Drug Overdose Trends', width = 2
         ),
         mainPanel(
         ))
     ),
-    tabPanel('Eval 2',
+    tabPanel('Potential Impact',
       sidebarLayout(
-        sidebarPanel('placehold', width = 2
+        sidebarPanel('Impact of Safe Injection Site on Seattle Area', width = 2
         ),
         mainPanel(
         ))
     ),
-    tabPanel('Eval 3',
+    tabPanel('Implementation Guide',
       sidebarLayout(
-       sidebarPanel('placehold', width = 2
+       sidebarPanel('Guide for Proper Implementation', width = 2
        ),
        mainPanel(
        ))
