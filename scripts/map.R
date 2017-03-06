@@ -5,14 +5,15 @@
 #Used tutorial from http://www.geo.ut.ee/aasa/LOOM02331/heatmap_in_R.html
 
 #setwd('/Users/kylegoodwin/health/SafeInjection')
-devtools::install_github("dkahle/ggmap")
-devtools::install_github("hadley/ggplot2")
+#devtools::install_github("dkahle/ggmap")
+#devtools::install_github("hadley/ggplot2")
 require(dplyr)
 require(ggplot2)
 require(ggmap)
 
 
 data <- read.csv('data/spd-overdose-deaths.csv',stringsAsFactors = FALSE)
+date.data <- read.csv('data/spd-updated-data.csv',stringsAsFactors = FALSE)
   
 allMaps <- function(loc, zoom,sz,a){
   
@@ -35,3 +36,8 @@ allSeattleMap <- function(){
 downtownMap <- function(){
   return(allMaps('westlake park',14,2,.16))
 }
+
+new.datad <- date.data %>% mutate(add = 1) %>% filter(year == 2016) %>%
+  group_by(Zone.Beat) %>%
+  summarise(sum(add))
+                                                     
