@@ -25,11 +25,35 @@ shinyUI(fluidPage(theme = shinytheme('sandstone'),
         )
     ),
     tabPanel('Potential Impact',
-      sidebarLayout(
-        sidebarPanel('Impact of Safe Injection Site on Seattle Area', width = 3
-        ),
         mainPanel(
-        ))
+          h2('Impact of Safe Injection Facilities on King County'),
+          p('The two recently approved safe injection sites for King County will be very 
+            similar to the one established just north of Seattle in Vancouver, British 
+            Columbia in 2003. Following suit after many European cities, Canadian Cities 
+            have been implementing safe injection facilities for injection drug users in 
+            efforts to reduce community and public health impacts.'),
+          p('Since its opening, the Vancouver SIF has seen 3.5 million visits. According 
+            to Vancouver Coastal Health, in 2015, there were 263,713 visits by 6,532 
+            individials (avg. 722 visits/day), 768 overdoses, 5,368 referrals to social 
+            and health services with 262 completing drug treatment. They also claim to 
+            have reversed nearly 5,000 overdoses, with no deaths, all while preventing 
+            the spread of diseases such as HIV and hepatitis C and reducing dangerous 
+            litter on local streets. Seeking funding and location commitment, Seattle 
+            and King County will be the first to have facilities of its type on American 
+            soil albeit on a smaller scale.'),
+          p("In 2015, King County saw 209 heroin or prescription opioid overdose related 
+            deaths. British Columbia, which has a population that is roughly double that 
+            of King County, saw 914 deaths. Over 600 used needles were found in Seattle's 
+            urban core in November of 2016 alone. The primary purpose of SIFs are to 
+            create a more controlled environment to reduce public drug use, create 
+            relationships between the highly marginalized 'at-risk' population and health 
+            care, and encourage the seeking out of medical care and addiction treatment. 
+            This can be accomplished by providing clean injection equipment and medical 
+            attention in the case of overdose (contaminated needles and OD being major 
+            risk factors) as well as access/refferal to healthcare services."),
+          br(),
+          plotlyOutput('basicOdds')
+        )
     ),
     tabPanel('Implementation Guide',
       sidebarLayout(

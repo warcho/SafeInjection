@@ -18,6 +18,19 @@ shinyServer(function(input, output) {
     stateVis()
   })
   
+  output$basicOdds <- renderPlotly({
+    variable <- c('age < 30 yr', 'public drug use', 'homelessness', 'daily heroin injection',
+                  'daily cocaine injection', 'recent overdose')
+    odds.ratio <- c(1.6, 2.6, 1.7, 2.1, 1.6, 2.7)
+    oddsratios <- data.frame(variable, odds.ratio)
+    
+    compareodds <- plot_ly(y = oddsratios$variable, x = oddsratios$odds.ratio,
+                           type = 'bar', orientation = 'h') %>% 
+                    layout(title = 'Odds Ratios of IDU Behaviors',
+                           xaxis = list(title = 'Odds Ratio'),
+                           yaxis = list(title = 'Behavior'))
+  })
+  
 })
 
 
