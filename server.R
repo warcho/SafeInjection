@@ -21,14 +21,17 @@ shinyServer(function(input, output) {
   output$basicOdds <- renderPlotly({
     variable <- c('age < 30 yr', 'public drug use', 'homelessness', 'daily heroin injection',
                   'daily cocaine injection', 'recent overdose')
-    odds.ratio <- c(1.6, 2.6, 1.7, 2.1, 1.6, 2.7)
-    oddsratios <- data.frame(variable, odds.ratio)
+    one <- c(1, 1, 1, 1, 1, 1)
+    odds.ratio <- c(0.6, 1.6, 0.7, 1.1, 0.6, 1.7)
+    oddsratios <- data.frame(variable, one, odds.ratio)
     
-    compareodds <- plot_ly(y = oddsratios$variable, x = oddsratios$odds.ratio,
-                           type = 'bar', orientation = 'h') %>% 
+    compareodds <- plot_ly(y = oddsratios$variable, x = oddsratios$one,
+                           name = 'average', type = 'bar', orientation = 'h') %>% 
+                    add_trace(x = oddsratios$odds.ratio, name = 'IDU @ SIF') %>% 
                     layout(title = 'Odds Ratios of IDU Behaviors',
                            xaxis = list(title = 'Odds Ratio'),
-                           yaxis = list(title = 'Behavior'))
+                           yaxis = list(title = 'Behavior'),
+                           barmode = 'stack')
   })
   
 })
