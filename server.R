@@ -25,13 +25,13 @@ shinyServer(function(input, output) {
     odds.ratio <- c(0.6, 1.6, 0.7, 1.1, 0.6, 1.7)
     oddsratios <- data.frame(variable, one, odds.ratio)
     
-    compareodds <- plot_ly(y = oddsratios$variable, x = oddsratios$one,
-                           name = 'average', type = 'bar', orientation = 'h') %>% 
-                    add_trace(x = oddsratios$odds.ratio, name = 'IDU @ SIF') %>% 
-                    layout(title = 'Odds Ratios of IDU Behaviors',
-                           xaxis = list(title = 'Odds Ratio'),
-                           yaxis = list(title = 'Behavior'),
-                           barmode = 'stack')
+    compareodds <- plot_ly(x = oddsratios$variable, y = oddsratios$one,
+                           name = 'average', type = 'bar') %>% 
+      add_trace(y = oddsratios$odds.ratio, name = 'IDU @ SIF') %>% 
+      layout(title = 'Odds Ratios of IDU Behaviors',
+             xaxis = list(title = 'Behavior'),
+             yaxis = list(title = 'Odds Ratio'),
+             barmode = 'stack')
   })
   
 })

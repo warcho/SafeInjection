@@ -52,7 +52,20 @@ shinyUI(fluidPage(theme = shinytheme('sandstone'),
             attention in the case of overdose (contaminated needles and OD being major 
             risk factors) as well as access/refferal to healthcare services."),
           br(),
-          plotlyOutput('basicOdds')
+          plotlyOutput('basicOdds'),
+          p("The graphic above displays the odds ratios of various risk factors of IDUs 
+            given that they attended the Vancouver SIF relative to other IDUs. Analyses 
+            of those users showed that the facility attracted a particularly high-risk 
+            population. The highest of those odds ratios were for experiencing a recent 
+            overdose. The odds of someone having recently experienced an overdose given 
+            that they attend the SIF are 2.7x higher than an IDU that does not attend 
+            the SIF. The higher odds are ultimately good for two reasons. The first 
+            being that it's preferable to have an IDU overdose in the presense of 
+            medical staff and the resources to attend to/reverse the overdose. The other 
+            being that it increases the likelihood of the higher-risk population to use 
+            in the facilities rather than in the streets with variables that may be out 
+            of their control. Our team believes a similar effect could be observed in 
+            the city of Seattle and the rest of King County.")
         )
     ),
     tabPanel('Implementation Guide',
