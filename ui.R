@@ -1,14 +1,18 @@
-
 library(shiny)
 library(shinythemes)
+library(plotly)
 
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(theme = shinytheme('sandstone'),
+                  
+  tags$head(
+    tags$link(rel = "stylesheet", type = "text/css", href = "app.css")
+  ),
   
   navbarPage('King County Safe Injection Sites',
     tabPanel('Drug Overdose Trends',
         mainPanel(
-          h2("Drug Overdose Trends In King County"),
+          h1("Drug Overdose Trends In King County"),
           p("Heroin and prescription opioid use has been exploding
             across the United States. Changes in prescription drug
             policies and a lack of addiction support services have
@@ -20,7 +24,25 @@ shinyUI(fluidPage(theme = shinytheme('sandstone'),
             to implement two safe injection sites, spaces that offer a safe place
             for injection drug users too shoot up, while providing addiction treatment
             and other health services."),
+          br(),
+          h2("Basic Statistics"),
+          h3(paste(numberOfOverdosesYear(2016),"Lives Lost Due to Overdose in 2016")),
+          h3("6,998,794 Needles Were Exchanged in 2015"),
+          h3("35% Increase in people Seeking Treatment for Heroin Addiction "),
+          h3("Overdose is the #1 Injurty-Related Killer of 25-65 Year Olds"),
+          p("Source: Seattle Police Database, King County Community Human Services: Heroin Trends 2015"),
+          br(),
+          h2("Analysis of Recent Trends"),
+          p("From 2004 to 2014 King county saw a 80% increase in the number of publicly funded Opioid
+            addiction treatments, and a 21% increase in deaths attributable to the drugs. As tougher
+            federal laws about prescription drugs prevented people from abusing pills, more users
+            turned to Heroin for an intense and cheap high. Heroin is much more dangerous due to its
+            uncertain purity and potential for injection. This trend is shown in the visualization of CDC data bellow. "),
           plotlyOutput('trendPlot'),
+          br(),
+          h2("Map of Seattle Area Overdose Deaths (2010 - 2017)"),
+          p("Most data we have used in this project comes from the Seattle Police Department’s
+            data releases about Police reports. A map of these incidents is shown bellow."),
           htmlOutput("frame")
         )
     ),

@@ -8,7 +8,7 @@ shinyServer(function(input, output) {
   
   output$frame <- renderUI({
     input$Member
-    my_test <- tags$iframe(src='https://www.google.com/maps/d/u/0/embed?mid=142v0w1u6XGVXu_i9B38133Ou1GQ',height=600, width=535)
+    my_test <- tags$iframe(src='https://www.google.com/maps/d/u/0/embed?mid=142v0w1u6XGVXu_i9B38133Ou1GQ',height=600, width='100%')
     print(my_test)
     my_test
   })
