@@ -78,30 +78,39 @@ return(month_chart)
 
 ###################################################
 #data that has a "at scene time"
-time_2016 <- data_updated 
-time_2016$At.Scene.Time <- lapply(time_2016$At.Scene.Time, as.character)
-
-library(stringr)
-time_2016 <- str_split_fixed(time_2016$At.Scene.Time, " ", 2)
-time_2016 <- data.frame(time_2016[!apply(time_2016 == "", 1, all),])
-
-AM16 <- filter(time_2016, grepl('AM', X2)) %>% group_by(X2) %>% summarise(Overdose.Deaths = n())
-PM16 <- filter(time_2016, grepl('PM', X2)) %>% group_by(X2) %>% summarise(Overdose.Deaths = n())
-
-AM16$X2 <- as.numeric(format(strptime(AM16$X2,"%H:%M:%S"),'%I'))
-PM16$X2 <- as.numeric(format(strptime(PM16$X2,"%H:%M:%S"),'%I')) + 12
-
-AM16 <- AM16 %>% group_by(X2) %>% summarise(Overdose.Deaths = n())
-PM16 <- PM16 %>% group_by(X2) %>% summarise(Overdose.Deaths = n())
-
-AM_PM16 <- bind_rows(AM16, PM16)
-
-time_chart2 <- plot_ly(AM_PM16, x = ~X2, y = ~Overdose.Deaths, type = 'bar', text = text,
-                      marker = list(color = ~Overdose.Deaths,
-                                    line = list(color = ~Overdose.Deaths,
-                                                width = 1.5))) %>%
+#writes a function to output a plot using the "at scene time" from 2016 only
+time2016 <- function(){
+  time_2016 <- data_updated 
+  time_2016$At.Scene.Time <- lapply(time_2016$At.Scene.Time, as.character)
   
-  layout(title = "Seattle Overdose Deaths by Time of Day",
-         xaxis = list(title = "Time of Day"),
-         yaxis = list(title = "Overdose Deaths"))
-time_chart2
+  #split time and date
+  library(stringr)
+  time_2016 <- str_split_fixed(time_2016$At.Scene.Time, " ", 2)
+  time_2016 <- data.frame(time_2016[!apply(time_2016 == "", 1, all),])
+  
+  #create new data frames for AM and PM
+  AM16 <- filter(time_2016, grepl('AM', X2)) %>% group_by(X2) %>% summarise(Overdose.Deaths = n())
+  PM16 <- filter(time_2016, grepl('PM', X2)) %>% group_by(X2) %>% summarise(Overdose.Deaths = n())
+  
+  #change time to posix object and change time to 24 hours
+  AM16$X2 <- as.numeric(format(strptime(AM16$X2,"%H:%M:%S"),'%I'))
+  PM16$X2 <- as.numeric(format(strptime(PM16$X2,"%H:%M:%S"),'%I')) + 12
+  
+  #get totals by time of day
+  AM16 <- AM16 %>% group_by(X2) %>% summarise(Overdose.Deaths = n())
+  PM16 <- PM16 %>% group_by(X2) %>% summarise(Overdose.Deaths = n())
+  
+  #create new df with totals for time of day (24 hour time)
+  AM_PM16 <- bind_rows(AM16, PM16)
+  
+  #create a barplot that plots overdoses by hour of the day for 2016
+  time_chart2 <- plot_ly(AM_PM16, x = ~X2, y = ~Overdose.Deaths, type = 'bar', text = text,
+                         marker = list(color = ~Overdose.Deaths,
+                                       line = list(color = ~Overdose.Deaths,
+                                                   width = 1.5))) %>%
+    
+    layout(title = "Seattle Overdose Deaths by Time of Day",
+           xaxis = list(title = "Time of Day"),
+           yaxis = list(title = "Overdose Deaths"))
+  return(time_chart2)
+}

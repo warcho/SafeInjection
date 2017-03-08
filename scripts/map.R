@@ -14,7 +14,8 @@ require(ggmap)
 
 data <- read.csv('data/spd-overdose-deaths.csv',stringsAsFactors = FALSE)
 date.data <- read.csv('data/spd-updated-data.csv',stringsAsFactors = FALSE)
-  
+
+#This function creates a map given a base location, size of marker, and opacity
 allMaps <- function(loc, zoom,sz,a){
   
   base.map <- get_map(location = loc, zoom = zoom)

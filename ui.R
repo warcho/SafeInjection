@@ -1,8 +1,8 @@
 library(shiny)
 library(shinythemes)
 library(plotly)
-source('scripts/basic-statistics.r')
-source('scripts/spd_wrangle.r')
+source('scripts/basic-statistics.R')
+source('scripts/spd_wrangle.R')
 
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(theme = shinytheme('sandstone'),

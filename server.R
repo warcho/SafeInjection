@@ -1,6 +1,6 @@
 library(shiny)
-source('scripts/basic-statistics.r')
-source('scripts/map.r')
+source('scripts/basic-statistics.R')
+source('scripts/map.R')
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
@@ -25,6 +25,8 @@ shinyServer(function(input, output) {
   })
   
   output$basicOdds <- renderPlotly({
+    
+    #Use data from Insite study to create a visualization
     variable <- c('Age < 30 yr', 'Public Drug Use', 'Homelessness', 'Daily Heroin Injection',
                   'Daily Cocaine Injection', 'Recent Overdose')
     one <- c(1, 1, 1, 1, 1, 1)
@@ -56,7 +58,7 @@ shinyServer(function(input, output) {
   })
   
   output$monthChart <- renderPlotly({
-    
+    #From spd-wrangle file
     monthChart()
   })
   
