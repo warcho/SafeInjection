@@ -1,10 +1,9 @@
-
 library(shiny)
 source('scripts/basic-statistics.r')
+source('scripts/map.r')
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
-  
   
   output$frame <- renderUI({
     input$Member
@@ -13,14 +12,21 @@ shinyServer(function(input, output) {
     my_test
   })
   
+  output$frame2 <- renderUI({
+    input$Member
+    my_test <- tags$iframe(src='https://www.google.com/maps/d/u/0/embed?mid=1orhr3nhoStbT71RH-6WZAGCx1fM',height=600, width='100%')
+    print(my_test)
+    my_test
+  })
   
   output$trendPlot <- renderPlotly({
+    #From basic-statistics file
     stateVis()
   })
   
   output$basicOdds <- renderPlotly({
-    variable <- c('age < 30 yr', 'public drug use', 'homelessness', 'daily heroin injection',
-                  'daily cocaine injection', 'recent overdose')
+    variable <- c('Age < 30 yr', 'Public Drug Use', 'Homelessness', 'Daily Heroin Injection',
+                  'Daily Cocaine Injection', 'Recent Overdose')
     one <- c(1, 1, 1, 1, 1, 1)
     odds.ratio <- c(0.6, 1.6, 0.7, 1.1, 0.6, 1.7)
     oddsratios <- data.frame(variable, one, odds.ratio)
@@ -32,6 +38,26 @@ shinyServer(function(input, output) {
              xaxis = list(title = 'Behavior'),
              yaxis = list(title = 'Odds Ratio'),
              barmode = 'stack')
+  })
+  
+  output$downtownMap <- renderPlot({
+    #From map file
+    downtownMap()
+  })
+  
+  output$northSeattleMap <- renderPlot({
+    #From map file
+    northSeattleMap()
+  })
+  
+  output$timeChart <- renderPlotly({
+    #From spd-wrangle file
+    timeChart()
+  })
+  
+  output$monthChart <- renderPlotly({
+    
+    monthChart()
   })
   
 })

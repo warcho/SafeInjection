@@ -5,7 +5,7 @@ require(tidyr)
 require(plotly)
 require(lubridate)
 
-setwd("C:/Users/creil/Desktop/Winter 2017/Info498/Final/SafeInjection")
+#setwd("C:/Users/creil/Desktop/Winter 2017/Info498/Final/SafeInjection")
 data <- data.frame(read.csv("data/spd-overdose-deaths.csv"), stringsAsFactors = FALSE)
 
 ###Used to make second dataset
@@ -74,11 +74,7 @@ month_chart <- plot_ly(by.month, x = ~month, y = ~Overdose.Deaths, type = 'bar',
 return(month_chart)
 }
 
-monthChart()
 
-list <- c('D', 'M', 'K')
-downtown <- filter(data_updated, District.Sector %in% weed)
-downtown_ratio <- nrow(downtown)/nrow(data_updated)
 
 ###################################################
 #data that has a "at scene time"

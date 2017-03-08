@@ -26,18 +26,19 @@ return(final.map)
 }
 
 northSeattleMap <- function(){
-  return(allMaps('green lake',13,3,.3))
+  nmap <- allMaps('green lake',13,3,.3)
+  return(nmap)
 }
 
 allSeattleMap <- function(){
-  return(allMaps('seattle',12,2,.3))
+  amap <- allMaps('seattle',12,2,.3)
+  return(amap)
 }
 
 downtownMap <- function(){
-  return(allMaps('westlake park',14,2,.16))
+  dmap <- allMaps('westlake park',14,2,.16)
+  return(dmap)
 }
+  
 
-new.datad <- date.data %>% mutate(add = 1) %>% filter(year == 2016) %>%
-  group_by(Zone.Beat) %>%
-  summarise(sum(add))
                                                      
